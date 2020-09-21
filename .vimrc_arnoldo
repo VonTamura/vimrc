@@ -1,0 +1,366 @@
+" ---------------------------------------------------------------------------
+" General
+"---------------------------------------------------------------------------
+set history=1000                      " lots of command line history
+set cf                                " error files / jumping
+set ffs=unix,dos,mac                  " support these files
+set isk+=_,$,@,%,#,-                  " none word dividers
+set viminfo='1000,f1,:100,@100,/20
+set modeline                          " make sure modeline support is enabled
+set autoread                          " reload files (no local changes only)
+set encoding=utf-8    " Set default encoding to UTF-8
+"set hidden
+let g:vroom_use_vimux = 0
+
+"----------------------------------------------------------------------------
+" Color schemes for gnome and tmux
+"----------------------------------------------------------------------------
+"if $COLORTERM == 'gnome-terminal'
+  "set term=gnome-256color
+"else
+  "if $TERM == 'xterm'
+    "set term=xterm-256color
+  "end
+"endif
+"set term=xterm-256color
+set t_Co=256
+
+" --------------------------------------------------------------------------
+" Folds
+" ---- ----------------------------------------------------------------------
+"set foldmethod=syntax "it causes perfomance issues in ubuntu
+"set foldlevelstart=21
+
+" --------------------------------------------------------------------------
+" Vundle
+" --------------------------------------------------------------------------
+set nocompatible                      " required
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+"tools
+Plugin 'junegunn/fzf.vim'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'c9s/bufexplorer'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'ervandew/supertab'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'skalnik/vim-vroom'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rgarver/Kwbd.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mileszs/ack.vim'
+Plugin 'groenewege/vim-less'
+Plugin 'tpope/vim-endwise'
+Plugin 'jwhitley/vim-matchit'
+Plugin 'kana/vim-textobj-user'
+Plugin 'bling/vim-airline'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'bron-/vim-ruby-fold'
+Plugin 'posva/vim-vue'
+
+"langs
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'tpope/vim-rails'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'Shutnik/jshint2.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'StanAngeloff/php.vim'
+
+"colors
+Plugin 'flazz/vim-colorschemes'
+Plugin 'vim-scripts/EasyGrep'
+
+"Go lang
+Plugin 'fatih/vim-go'
+
+call vundle#end()
+filetype plugin indent on
+
+
+
+
+""""""""""""""""""""""""""""""""
+"            Ack               "
+""""""""""""""""""""""""""""""""
+let g:ackprg="/usr/local/bin/ack -H --nocolor --nogroup --column"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  tmuxline                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:tmuxline_preset = 'full'
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Ultisnips                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsEditSplit = "vertical"
+
+" use tabs to expand snippets and jump forward on tabstops
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+
+" ---------------------------------------------------------------------------
+" Powerline
+" ---------------------------------------------------------------------------
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+" ---------------------------------------------------------------------------
+" Colors / Theme
+" ---------------------------------------------------------------------------
+
+syntax on
+set hlsearch
+colorscheme solarized
+
+" ----------------------------------------------------------------------------
+"   Highlight Trailing Whitespace
+" ----------------------------------------------------------------------------
+
+set list listchars=trail:.,tab:>.
+highlight SpecialKey ctermfg=DarkGray ctermbg=Black
+
+" ----------------------------------------------------------------------------
+"  Backups
+" ----------------------------------------------------------------------------
+
+"set nobackup                           " do not keep backups after close
+"set nowritebackup                      " do not keep a backup while working
+"set noswapfile                         " don't keep swp files either
+"set backupdir=$HOME/.vim/backup        " store backups under ~/.vim/backup
+"set backupcopy=yes                     " keep attributes of original file
+"set backupskip=/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
+"set directory=~/.vim/swap,~/tmp,.      " keep swp files under ~/.vim/swap
+set directory=~/tmp
+set backupdir=~/tmp
+
+" ----------------------------------------------------------------------------
+"  UI
+" ----------------------------------------------------------------------------
+
+set ruler                  " show the cursor position all the time
+set noshowcmd              " don't display incomplete commands
+"set nolazyredraw           " turn off lazy redraw
+set number                 " line numbers
+set wildmenu               " turn on wild menu
+set wildmode=list:longest,full
+set ch=2                   " command line height
+set backspace=2            " allow backspacing over everything in insert mode
+set whichwrap+=<,>,h,l,[,] " backspace and cursor keys wrap to
+set report=0               " tell us about changes
+set nostartofline          " don't jump to the start of line when scrolling
+
+" ----------------------------------------------------------------------------
+" Visual Cues
+" ----------------------------------------------------------------------------
+
+set showmatch              " brackets/braces that is
+set mat=5                  " duration to show matching brace (1/10 sec)
+set incsearch              " do incremental searching
+"set laststatus=2           " always show the status line, this causes some slow performance on ubuntu terminal
+set ignorecase             " ignore case when searching
+set visualbell             " shut the fuck up
+
+" ----------------------------------------------------------------------------
+" Text Formatting
+" ----------------------------------------------------------------------------
+
+set autoindent             " automatic indent new lines
+set smartindent            " be smart about it
+set nowrap                 " do not wrap lines
+set softtabstop=2          " yep, two
+set shiftwidth=2           " ..
+set tabstop=4
+set expandtab              " expand tabs to spaces
+set nosmarttab             " fuck tabs
+set formatoptions+=n       " support for numbered/bullet lists
+set virtualedit=block      " allow virtual edit in visual block ..
+
+" ----------------------------------------------------------------------------
+"  Mappings
+" ----------------------------------------------------------------------------
+
+" remap <LEADER> to ',' (instead of '\')
+let  mapleader = ","
+
+" zoomwin
+map <leader>z :ZoomWin<cr>
+
+" navigation
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+nmap <silent><leader>k :Kwbd<cr>
+
+" upper/lower word
+nmap <leader>u mQviwU`Q
+nmap <leader>l mQviwu`Q
+
+" cd to the directory containing the file in the buffer
+nmap <silent> <leader>cd :lcd %:h<CR>
+
+" Create the directory containing the file in the buffer
+nmap <silent> <leader>md :!mkdir -p %:p:h<CR>
+
+" Some helpers to edit mode
+" http://vimcasts.org/e/14
+nmap <leader>ew :e <C-R>=expand('%:h').'/'<cr>
+nmap <leader>es :sp <C-R>=expand('%:h').'/'<cr>
+nmap <leader>ev :vsp <C-R>=expand('%:h').'/'<cr>
+nmap <leader>et :tabe <C-R>=expand('%:h').'/'<cr>
+
+" Swap two words
+nmap <silent> gw :s/\(\%#\w\+\)\(\_W\+\)\(\w\+\)/\3\2\1/<CR>`'
+
+" find merge conflict markers
+nmap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
+
+" Toggle hlsearch with <leader>hs
+nmap <leader>hs :set hlsearch! hlsearch?<CR>
+
+" Adjust viewports to the same size
+map <Leader>= <C-w>=
+
+" Fugitive
+nmap <silent><leader>gb :Gblame<CR>
+nmap <silent><leader>gs :Gstatus<CR>
+nmap <silent><leader>gd :Gdiff<CR>
+nmap <silent><leader>gl :Glog<CR>
+nmap <silent><leader>gc :Gcommit<CR>
+nmap <silent><leader>gp :Git push<CR>
+
+"Tagbar
+nmap <silent><leader>ttt :TagbarToggle<CR>
+nmap <silent><leader>ttp :TagbarTogglePause<CR>
+
+
+"NERDTree
+nmap <leader>n :NERDTreeToggle<CR>
+"Reveal current file in nerdtree
+nmap ,no :NERDTreeFind<CR>
+let g:NERDTreeWinPos = "right"
+
+
+" ----------------------------------------------------------------------------
+"  Auto Commands
+" ----------------------------------------------------------------------------
+
+" jump to last position of buffer when opening
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+      \ exe "normal g'\"" | endif
+
+" don't use cindent for javascript
+autocmd FileType javascript setlocal nocindent
+
+" ----------------------------------------------------------------------------
+"  PATH on MacOS X
+" ----------------------------------------------------------------------------
+
+"if system('uname') =~ 'Darwin'
+  "let $PATH = $HOME .
+        "\ '/usr/local/bin:/usr/local/sbin:' .
+        "\ '/usr/pkg/bin:' .
+        "\ '/opt/local/bin:/opt/local/sbin:' .
+        "\ $PATH
+"endif
+
+" ---------------------------------------------------------------------------
+"  sh config
+" ---------------------------------------------------------------------------
+
+au Filetype sh,bash set ts=4 sts=4 sw=4 expandtab
+let g:is_bash = 1
+
+" ---------------------------------------------------------------------------
+"  Open URL on current line in browser
+" ---------------------------------------------------------------------------
+
+function! Browser ()
+  let line0 = getline (".")
+  let line = matchstr (line0, "http[^ )]*")
+  let line = escape (line, "#?&;|%")
+  exec ':silent !open ' . "\"" . line . "\""
+endfunction
+map ,ww :call Browser ()<CR>
+
+" ---------------------------------------------------------------------------
+"  Strip all trailing whitespace in file
+" ---------------------------------------------------------------------------
+
+function! StripWhitespace ()
+  exec ':%s/ \+$//gc'
+endfunction
+map ,s :call StripWhitespace ()<CR>
+
+" ---------------------------------------------------------------------------
+" File Types
+" ---------------------------------------------------------------------------
+
+au BufRead,BufNewFile *.ru         set ft=ruby
+au BufRead,BufNewFile *.god        set ft=ruby
+au BufRead,BufNewFile *.sql        set ft=pgsql
+au BufRead,BufNewFile *.rl         set ft=ragel
+au BufRead,BufNewFile *.svg        set ft=svg
+au BufRead,BufNewFile *.haml       set ft=haml
+au BufRead,BufNewFile *.md         set ft=mkd tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.markdown   set ft=mkd tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.ronn       set ft=mkd tw=80 ts=2 sw=2 expandtab
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} setf markdown
+au BufNewFile,BufRead,BufReadPost *.{jade,jade.html} set filetype=jade
+
+au FileType python setlocal softtabstop=4 tabstop=4 shiftwidth=4
+au FileType php setlocal softtabstop=4 tabstop=4 shiftwidth=4
+au Filetype gitcommit set tw=68  spell
+au Filetype ruby      set tw=80  ts=2
+au FileType make setlocal noexpandtabxx
+
+" Golang configurations
+let g:go_fmt_autosave = 0
+
+" Syntax highlighting
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let esversion = 6
+let g:syntastic_php_checkers=['php', 'phpcs']
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+"let g:syntastic_javascript_checkers = ['standard']
+" Silence Go vim version warning
+let g:go_version_warning = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+
+" If installed using Homebrew
+set rtp+=/usr/local/opt/fzf
