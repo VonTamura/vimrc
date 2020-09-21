@@ -1,2 +1,2 @@
 # vimrc
-my vim rc
+Archive vimrc examples
